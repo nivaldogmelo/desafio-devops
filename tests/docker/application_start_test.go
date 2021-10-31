@@ -11,7 +11,7 @@ import (
 )
 
 func TestDockerStartApplication(t *testing.T) {
-	image := "comment-api:develop"
+	image := "nivaldogmelo/comment-api:v1"
 	containerName := strings.ToLower(random.UniqueId())
 
 	runOptions := &docker.RunOptions{

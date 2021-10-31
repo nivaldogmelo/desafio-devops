@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-docker build -t comment-api:develop -f build/Dockerfile .
+docker build -t nivaldogmelo/comment-api:v1 -f build/Dockerfile .
