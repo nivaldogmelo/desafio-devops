@@ -1,0 +1,34 @@
+version: "3.3"
+services:
+  app:
+    container_name: comment-api
+    image: "nivaldogmelo/comment-api:v1"
+    ports:
+      - "8000:8000"
+  prometheus:
+    container_name: prometheus
+    image: "prom/prometheus:main"
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+    volumes:
+      - ../../monitoring/prometheus/config.yaml:/etc/prometheus/prometheus.yaml
+  grafana:
+    container_name: grafana
+    image: "grafana/grafana:6.5.0"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../../monitoring/grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ../../monitoring/grafana/dashboard-datasource.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+      - ../../monitoring/grafana/dashboard.json:/var/lib/grafana/dashboards/dashboard.json
+  prometheus-blackbox:
+    container_name: prometheus-blackbox
+    image: "prom/blackbox-exporter:master"
+    ports:
+      - "9115:9115"
+    command:
+      - '--config.file=/etc/blackbox/config.yaml'
+    volumes:
+      - ../../monitoring/prometheus-blackbox/config.yaml:/etc/blackbox/config.yaml
