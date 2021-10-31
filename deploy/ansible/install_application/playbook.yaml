@@ -1,0 +1,38 @@
+---
+- name: Start Application
+  hosts: app
+  remote_user: ansible
+  become: true
+  vars_files:
+  - vars.yaml
+
+  tasks:
+    - name: Install docker
+      include_tasks:
+        file: "../modules/docker/install/playbook.yaml"
+      vars:
+        version: "{{ debian_version }}"
+
+    - name: Install docker-composer
+      include_tasks:
+        file: "../modules/docker/install_composer/playbook.yaml"
+
+    - name: Start docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: ../../docker-compose/docker-compose.yaml
+        dest: /home/ansible/docker-compose.yaml
+        owner: ansible
+        group: ansible
+        mode: '0666'
+
+    - name: Start Server
+      include_tasks:
+        file: "../modules/docker/start_composer/playbook.yaml"
+      vars:
+        project_src: "/home/ansible"

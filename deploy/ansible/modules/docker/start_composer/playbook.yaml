@@ -1,0 +1,16 @@
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+
+- name: Install Docker Compose Module for Python
+  pip:
+    name: docker-compose==1.23.0
+
+- name: Tear down existing services
+  community.docker.docker_compose:
+    project_src: "{{ project_src }}"
+    state: absent
+
+- name: Create and start services
+  community.docker.docker_compose:
+    project_src: "{{ project_src }}"

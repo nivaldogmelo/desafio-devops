@@ -1,0 +1,4 @@
+---
+debian_version: stretch
+container_name: comment-api
+container_image: nivaldogmelo/comment-api
