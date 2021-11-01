@@ -51,9 +51,9 @@ jobs:
       with:
         playbook: install_application/playbook.yaml
         directory: ./deploy/ansible/
-        # Optional, SSH private key
         key: ${{secrets.ANSIBLE_SSH_KEY}}
-        # Optional, literal inventory file contents
         inventory: |
           [app]
           34.123.248.117
+        options: |
+          -vvvv
