@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  setup-machine:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -46,11 +46,16 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
+  configure-machine:
+    runs-on: ubuntu-latest
+    needs: setup-machine
+    steps:
+    - uses: actions/checkout@v2
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: install_application/playbook.yaml
-        directory: ./deploy/ansible/
+        directory: deploy/ansible/
         key: ${{ secrets.ANSIBLE_SSH_KEY }}
         inventory: |
           [app]
