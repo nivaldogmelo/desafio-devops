@@ -46,9 +46,8 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
-    - name: Run playbook
-      uses: dawidd6/action-ansible-playbook@v2
+    - uses: saubermacherag/ansible-playbook-docker-action@v1.4
       with:
-        playbook: deploy/ansible/install_application/playbook.yaml
-        key: ${{secrets.ANSIBLE_SSH_KEY}}
-        inventory: deploy/ansible/hosts.yaml
+        playbookName: 'deploy/ansible/install_application/playbook.yaml'
+        inventoryFile: 'deploy/ansible/hosts.yaml'
+        keyFile: 'deploy/ansible/.ssh_key/key.pem'
