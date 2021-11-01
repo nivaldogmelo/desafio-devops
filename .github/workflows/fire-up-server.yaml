@@ -48,11 +48,13 @@ jobs:
 
     - name: Get server IP
       id: ip
-      shell: bash
+      with:
+        entrypoint: bash
       run: ${{ steps.apply.outputs.stdout }} | grep "comment_api_ip" | cut -d '"' -f2
 
     - name: Set Ansible host IP
-      shell: bash
+      with:
+        entrypoint: bash
       run: sed "s/@IP/${{ steps.ip.output.stdout }}/g" deploy/ansible/hosts.yaml
 
     - uses: saubermacherag/ansible-playbook-docker-action@v1.4
