@@ -46,10 +46,14 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
-    - uses: saubermacherag/ansible-playbook-docker-action@v1.4
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
       with:
-        playbookName: 'deploy/ansible/install_application/playbook.yaml'
-        inventoryFile: 'deploy/ansible/hosts.yaml'
-        keyFile: 'deploy/ansible/.ssh_key/key.pem'
-      env:
-        ANSIBLE_HOST_KEY_CHECKING: False
+        playbook: install_application/playbook.yaml
+        directory: ./deploy/ansible/
+        # Optional, SSH private key
+        key: ${{secrets.ANSIBLE_SSH_KEY}}
+        # Optional, literal inventory file contents
+        inventory: |
+          [app]
+          34.123.248.117
