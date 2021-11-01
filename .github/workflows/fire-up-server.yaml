@@ -36,7 +36,7 @@ jobs:
       run: terraform plan -no-color
       continue-on-error: false
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
     - name: Terraform Apply
       id: apply
@@ -44,7 +44,7 @@ jobs:
       run: terraform apply -auto-approve
       continue-on-error: false
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
     - name: Setup server IP
       run: sed "s/@IP/${{ steps.apply.outputs.stdout }} | grep \"ip\" | cut -d '\"' -f2/g deploy/ansible/hosts.yaml"
