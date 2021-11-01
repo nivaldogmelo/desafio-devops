@@ -43,5 +43,7 @@ resource "google_compute_firewall" "comment_api" {
     ports    = ["8000", "3000"]
   }
 
-  source_tags = ["comment-api"]
+  target_tags = ["comment-api"]
+
+  source_ranges = ["0.0.0.0/0"]
 }
