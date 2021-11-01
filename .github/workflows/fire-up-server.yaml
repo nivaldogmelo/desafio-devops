@@ -46,8 +46,12 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
-    - name: Setup server IP
-      run: sed "s/@IP/${{ steps.apply.outputs.stdout }} | grep \"ip\" | cut -d '\"' -f2/g deploy/ansible/hosts.yaml"
+    - name: Get server IP
+      id: ip
+      run: ${{ steps.apply.outputs.stdout }} | grep "comment_api_ip" | cut -d '"' -f2
+
+    - name: Set Ansible host IP
+      run: sed "s/@IP/${{ steps.ip.output.stdout }}/g" deploy/ansible/hosts.yaml
 
     - uses: saubermacherag/ansible-playbook-docker-action@v1.4
       with:
