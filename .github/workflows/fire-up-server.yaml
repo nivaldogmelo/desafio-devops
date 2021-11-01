@@ -16,24 +16,29 @@ jobs:
 
     - name: Terraform fmt
       id: fmt
+      working-directory: deploy/terraform
       run: terraform fmt -check
       continue-on-error: false
 
     - name: Terraform Init
       id: init
+      working-directory: deploy/terraform
       run: terraform init
 
     - name: Terraform Validate
       id: validate
+      working-directory: deploy/terraform
       run: terraform validate -no-color
 
     - name: Terraform Plan
       id: plan
+      working-directory: deploy/terraform
       run: terraform plan -no-color
       continue-on-error: false
 
     - name: Terraform Apply
       id: apply
+      working-directory: deploy/terraform
       run: terraform apply -auto-approve
       continue-on-error: false
       env:
