@@ -34,7 +34,7 @@
     - name: Copy monitoring configurations
       ansible.posix.synchronize:
         src: ../../../monitoring
-        dest: /monitoring
+        dest: /
         recursive: true
 
     - name: Start Server
