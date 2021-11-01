@@ -34,7 +34,7 @@ jobs:
       id: plan
       working-directory: deploy/terraform
       run: terraform plan -no-color
-      continue-on-error: false
+      continue-on-error: true
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
@@ -42,7 +42,7 @@ jobs:
       id: apply
       working-directory: deploy/terraform
       run: terraform apply -auto-approve
-      continue-on-error: false
+      continue-on-error: true
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
