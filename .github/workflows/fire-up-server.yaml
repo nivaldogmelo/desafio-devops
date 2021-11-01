@@ -35,6 +35,8 @@ jobs:
       working-directory: deploy/terraform
       run: terraform plan -no-color
       continue-on-error: false
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_TOKEN }}
 
     - name: Terraform Apply
       id: apply
