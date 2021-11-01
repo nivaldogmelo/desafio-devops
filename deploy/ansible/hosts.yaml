@@ -3,6 +3,6 @@ all:
   children:
     app:
       hosts:
-        @IP
+        35.209.195.21
       vars:
         ansible_python_interpreter: /usr/bin/python3
