@@ -14,4 +14,4 @@
 
 - name: Update apt and install docker-ce
   apt: update_cache=yes name=docker-ce state=latest
-  loop: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+  loop: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'python-setuptools']
