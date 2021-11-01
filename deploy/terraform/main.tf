@@ -20,7 +20,7 @@ resource "google_compute_instance" "comment_api" {
 
     access_config {
       // Ephemeral public IP
-      nat_ip = "35.209.195.21"
+      nat_ip = "34.123.248.117"
     }
   }
 
