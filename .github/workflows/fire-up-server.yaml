@@ -51,3 +51,5 @@ jobs:
         playbookName: 'deploy/ansible/install_application/playbook.yaml'
         inventoryFile: 'deploy/ansible/hosts.yaml'
         keyFile: 'deploy/ansible/.ssh_key/key.pem'
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: False
