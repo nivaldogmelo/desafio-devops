@@ -6,6 +6,10 @@
   pip:
     name: docker-compose==1.23.0
 
+- name: Install setuptools Module for Python
+  pip:
+    name: setuptools
+
 - name: Tear down existing services
   community.docker.docker_compose:
     project_src: "{{ project_src }}"

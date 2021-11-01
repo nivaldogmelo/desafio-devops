@@ -31,6 +31,12 @@
         group: ansible
         mode: '0666'
 
+    - name: Copy monitoring configurations
+      ansible.posix.synchronize:
+        src: ../../../monitoring
+        dest: /monitoring
+        recursive: true
+
     - name: Start Server
       include_tasks:
         file: "../modules/docker/start_composer/playbook.yaml"
